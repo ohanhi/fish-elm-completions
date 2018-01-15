@@ -14,6 +14,8 @@ An example journey:
 [suggestions] evancz/elm-graphics evancz/elm-markdown ...
 ```
 
+![](elm-package-complete.gif)
+
 ## Installation
 
 You need `curl` installed for the interactive package completions.
