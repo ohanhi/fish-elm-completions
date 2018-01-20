@@ -29,7 +29,22 @@ complete -f -c elm-package -n "__fish_elm_package_needs_command install" -s y -l
 complete -f -c elm-package -n "__fish_elm_package_needs_command install" -s h -l help -d "Show this help text"
 
 # Based on https://github.com/eeue56/elm-bash-completion/
-set __fish_elm_package_packages (curl http://package.elm-lang.org/new-packages -sS | sed -E 's/"//' | sed -E 's/"//' | sed -E 's/\[//' | sed -E 's/]//' | awk '{$1=$1};1' | sed -E 's/,//' | tr '\n' ' ')
+function __fish_fetch_elm_package_list
+    set week_in_secs 604800
+    set current_time (date +%s)
+    if find ~/.config/fish/elm-packages.txt 2> /dev/null
+        set package_list_time (date -r ~/.config/fish/elm-packages.txt)
+    else
+        set package_list_time 0
+    end
+
+    if math "$current_time > $package_list_time + $week_in_secs"
+        curl http://package.elm-lang.org/new-packages -sS | sed -E 's/"//' | sed -E 's/"//' | sed -E 's/\[//' | sed -E 's/]//' | awk '{$1=$1};1' | sed -E 's/,//' | tr '\n' ' '  > ~/.config/fish/elm-packages.txt
+    end
+end
+
+__fish_fetch_elm_package_list
+set __fish_elm_package_packages (cat ~/.config/fish/elm-packages.txt)
 
 for package in $__fish_elm_package_packages
     echo $package
