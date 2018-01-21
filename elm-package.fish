@@ -25,8 +25,8 @@ end
 
 # Install
 complete -f -c elm-package -n '__fish_elm_package_needs_command' -a 'install' -d 'Install packages to use locally'
-complete -f -c elm-package -n "__fish_elm_package_needs_command install" -s y -l yes -d "Reply 'yes' to all automated prompts."
-complete -f -c elm-package -n "__fish_elm_package_needs_command install" -s h -l help -d "Show this help text"
+complete -f -c elm-package -n "__fish_elm_package_using_command install" -s y -l yes -d "Reply 'yes' to all automated prompts."
+complete -f -c elm-package -n "__fish_elm_package_using_command install" -s h -l help -d "Show this help text"
 
 # Based on https://github.com/eeue56/elm-bash-completion/
 function __fish_fetch_elm_package_list
