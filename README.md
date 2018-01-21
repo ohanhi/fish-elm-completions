@@ -2,9 +2,9 @@
 
 ## Features
 
-Full completions for `elm-package`, including all available package names. Other commands will likely be added soon enough.
+Full completions for `elm-make`, `elm-package` (including all available package names), `elm-reactor`, `elm-repl` and `elm-test`.
 
-An example journey:
+A couple of example journeys:
 
 ```fish
 > elm-pa[TAB] # elm-package
@@ -12,6 +12,12 @@ An example journey:
 > elm-package install ev[TAB] # elm-package install evancz/
 > elm-package install evancz/[TAB] 
 [suggestions] evancz/elm-graphics evancz/elm-markdown ...
+```
+
+```fish
+> elm-rea[TAB] # elm-reactor
+> elm-reactor --a[RIGHT ARROW] # elm-reactor --address
+> elm-reactor --address=[RIGHT ARROW] # elm-reactor --address=0.0.0.0
 ```
 
 ![](elm-package-complete.gif)
