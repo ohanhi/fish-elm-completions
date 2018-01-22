@@ -37,16 +37,15 @@ mkdir -p (dirname $__fish_elm_package_list_path)
 
 # Based on https://github.com/eeue56/elm-bash-completion/
 function __fish_fetch_elm_package_list
-    set week_in_secs 604800
-    set current_time (date +%s)
-    if find $__fish_elm_package_list_path 2>/dev/null
-        set package_list_time (date -r $__fish_elm_package_list_path)
-    else
-        set package_list_time 0
-    end
+    set _week_in_secs 604800
+    set _current_time (date +%s)
 
-    if math "$current_time > $package_list_time + $week_in_secs"
-        curl http://package.elm-lang.org/new-packages -sS | sed -E 's/"//' | sed -E 's/"//' | sed -E 's/\[//' | sed -E 's/]//' | awk '{$1=$1};1' | sed -E 's/,//' | tr '\n' ' ' >$__fish_elm_package_list_path
+    find $__fish_elm_package_list_path 2>/dev/null
+    and set _package_list_time (date -r $__fish_elm_package_list_path +%s)
+    or set _package_list_time 0
+
+    if math "$_current_time > $_package_list_time + $_week_in_secs"
+        curl 'http://package.elm-lang.org/new-packages' -sS | tr '\n' ' ' | sed -E 's/\s//g' | sed -E 's/"//g' | sed -E 's/,/ /g' | sed -E 's/\[//' | sed -E 's/]//' >$__fish_elm_package_list_path
     end
 end
 
