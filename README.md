@@ -10,7 +10,7 @@ A couple of example journeys:
 > elm-pa[TAB] # elm-package
 > elm-package i[TAB] # elm-package install
 > elm-package install ev[TAB] # elm-package install evancz/
-> elm-package install evancz/[TAB] 
+> elm-package install evancz/[TAB]
 [suggestions] evancz/elm-graphics evancz/elm-markdown ...
 ```
 
@@ -24,6 +24,8 @@ A couple of example journeys:
 
 ## Installation
 
-You need `curl` installed for the interactive package completions.
+> You need `curl` installed for the interactive package completions.
 
-Install by copying or cloning the files under the directory `~/.config/fish/completions/` on your computer. You can may create it if it doesn't exist yet.
+```sh
+$ curl -L https://gist.githubusercontent.com/akabiru/bc0b37a322582d9098bffe2f3316a94e/raw/0c2c80244a4bf68c8e0d89d3f4d2ce4904c64d1e/install_fish_elm_completions.fish | fish
+```
