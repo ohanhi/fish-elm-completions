@@ -28,23 +28,30 @@ complete -f -c elm-package -n '__fish_elm_package_needs_command' -a 'install' -d
 complete -f -c elm-package -n "__fish_elm_package_using_command install" -s y -l yes -d "Reply 'yes' to all automated prompts."
 complete -f -c elm-package -n "__fish_elm_package_using_command install" -s h -l help -d "Show this help text"
 
+
+# If $XDG_CACHE_HOME is set, use that directory to save packages cache, otherwise use ~/.cache
+set -q XDG_CACHE_HOME
+    and set __fish_elm_package_list_path $XDG_CACHE_HOME/elm-packages.txt
+    or set __fish_elm_package_list_path ~/.cache/elm-packages.txt
+mkdir -p (dirname $__fish_elm_package_list_path)
+
 # Based on https://github.com/eeue56/elm-bash-completion/
 function __fish_fetch_elm_package_list
     set week_in_secs 604800
     set current_time (date +%s)
-    if find ~/.config/fish/elm-packages.txt 2> /dev/null
-        set package_list_time (date -r ~/.config/fish/elm-packages.txt)
+    if find $__fish_elm_package_list_path 2> /dev/null
+        set package_list_time (date -r $__fish_elm_package_list_path)
     else
         set package_list_time 0
     end
 
     if math "$current_time > $package_list_time + $week_in_secs"
-        curl http://package.elm-lang.org/new-packages -sS | sed -E 's/"//' | sed -E 's/"//' | sed -E 's/\[//' | sed -E 's/]//' | awk '{$1=$1};1' | sed -E 's/,//' | tr '\n' ' '  > ~/.config/fish/elm-packages.txt
+        curl http://package.elm-lang.org/new-packages -sS | sed -E 's/"//' | sed -E 's/"//' | sed -E 's/\[//' | sed -E 's/]//' | awk '{$1=$1};1' | sed -E 's/,//' | tr '\n' ' '  > $__fish_elm_package_list_path
     end
 end
 
 __fish_fetch_elm_package_list
-set __fish_elm_package_packages (cat ~/.config/fish/elm-packages.txt)
+set __fish_elm_package_packages (cat $__fish_elm_package_list_path)
 
 for package in $__fish_elm_package_packages
     echo $package
