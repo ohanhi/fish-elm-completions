@@ -24,7 +24,15 @@ A couple of example journeys:
 
 ## Installation
 
-> You need `curl` installed for the interactive package completions.
+**NOTE:** You need `curl` installed for the interactive package completions.
+
+### [Fisherman](https://github.com/fisherman/fisherman)
+
+```fish
+> fisher ohanhi/fish-elm-completions
+```
+
+### Curl
 
 ```sh
 $ curl -L https://gist.githubusercontent.com/akabiru/bc0b37a322582d9098bffe2f3316a94e/raw/0c2c80244a4bf68c8e0d89d3f4d2ce4904c64d1e/install_fish_elm_completions.fish | fish
