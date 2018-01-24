@@ -32,6 +32,8 @@ A couple of example journeys in text:
 > fisher ohanhi/fish-elm-completions
 ```
 
-### Manual
+### Curl
 
-Install by copying or cloning the files under the directory `~/.config/fish/completions/` on your computer. You can may create it if it doesn't exist yet.
+```sh
+$ curl -L https://raw.githubusercontent.com/ohanhi/fish-elm-completions/master/hooks/install.fish | fish
+```
