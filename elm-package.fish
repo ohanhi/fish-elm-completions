@@ -31,8 +31,8 @@ complete -f -c elm-package -n "__fish_elm_package_using_command install" -s h -l
 
 # If $XDG_CACHE_HOME is set, use that directory to save packages cache, otherwise use ~/.cache
 set -q XDG_CACHE_HOME
-and set __fish_elm_package_list_path $XDG_CACHE_HOME/elm-packages.txt
-or set __fish_elm_package_list_path ~/.cache/elm-packages.txt
+and set -g __fish_elm_package_list_path $XDG_CACHE_HOME/elm-packages.txt
+or set -g __fish_elm_package_list_path ~/.cache/elm-packages.txt
 mkdir -p (dirname $__fish_elm_package_list_path)
 
 # Based on https://github.com/eeue56/elm-bash-completion/
