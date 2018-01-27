@@ -1,7 +1,7 @@
 #!/usr/local/bin/fish
 begin
   set fish_completions_dir ~/.config/fish/completions
-  set elm_tools 'make' 'package' 'reactor' 'repl' 'test'
+  set elm_tools 'elm' 'elm-make' 'elm-package' 'elm-reactor' 'elm-repl' 'elm-test'
 
   function verify_completions_dir
     if test -d $fish_completions_dir
@@ -14,7 +14,7 @@ begin
 
   function install_elm_completions
     for tool in $elm_tools
-      set -l t "elm-$tool.fish"
+      set -l t "$tool.fish"
 
       echo "=> Installing $t..."
       curl -o "$fish_completions_dir/$t" "https://raw.githubusercontent.com/ohanhi/fish-elm-completions/master/$t"
